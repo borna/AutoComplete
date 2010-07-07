@@ -10,10 +10,10 @@ header("Content-type: text/plain");
 // this is only plain text, so set the HTTP header accordingly
 
 $names = array( // this is our array of names - feel free to change/add as required!
-'a',
-'b',
-'c',
-'d'
+'borna',
+'brian',
+'algorithm',
+'git'
 );
 
 if (in_array($_GET['name'], $names)) { // if that name is in our array above

@@ -3,16 +3,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>First ever Ajax application with PHP</title>
+<link type="text/css" rel="stylesheet" href="index.css" />
 <script language="JavaScript" type="text/javascript">
 <!--
 
-
+var userInput = '';
 var ajaxObject = false; 
 // this is our object which gives us access
 // to Ajax functionality
 
 function doAjaxQuery(url) {
-
+	
+	if(document.getElementById('name').value != userInput)
+	{
+		userInput = document.getElementById('name').value;
+	}
+	else
+	{
+		return false;
+	}
+	
     ajaxObject = false;
 	
 	//if(document.getElementById('name').value >= 'a' && document.getElementById('name').value <= 'z')
@@ -86,15 +96,17 @@ function ajaxResponse() { // this function will handle the processing
 			if (ajaxObject.responseText == '1') // if the result is 1
 			{
 				//alert('Welcome back!');
-				alert(ajaxObject.responseText);
+				//alert(ajaxObject.responseText);
+				document.getElementById('divResponse').className = "visibleDiv";
 
 			}
 
-			//else { // otherwise
+			else { // otherwise
 
 			//	alert('Nice to meet you, stranger!');
+				document.getElementById('divResponse').className = "hiddenDiv";
 
-			//}
+			}
 
 		} // end if
 
@@ -118,8 +130,9 @@ function ajaxResponse() { // this function will handle the processing
 </head>
 <body>
 <form name="ajaxform" method="get" action="javascript:;" onkeyup="doAjaxQuery('ajaxKey.php?name=' + document.getElementById('name').value);"" onsubmit="doAjaxQuery('ajax.php?name=' + document.getElementById('name').value);">
-Name:&nbsp;&nbsp;<input type="text" name="name" id="name" value="" /><br /><br />
+Search:&nbsp;&nbsp;<input type="text" name="name" id="name" value="" /><br /><br />
 <input type="submit" value=" OK " />
 </form>
+<div Class="hiddenDiv" id="divResponse">word is in the database!</div>
 </body>
 </html>
