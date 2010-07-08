@@ -8,119 +8,111 @@
 <!--
 
 var userInput = '';
-var ajaxObject = false; 
+var ajaxObject = false;
 // this is our object which gives us access
 // to Ajax functionality
 
 function doAjaxQuery(url) {
-	
-	if(document.getElementById('name').value != userInput)
-	{
-		userInput = document.getElementById('name').value;
-	}
-	else
-	{
-		return false;
-	}
-	
-    ajaxObject = false;
-	
-	//if(document.getElementById('name').value >= 'a' && document.getElementById('name').value <= 'z')
-	//	alert(document.getElementById('name').value);
+if(document.getElementById('name').value != userInput)
+{
+userInput = document.getElementById('name').value;
+}
+else
+{
+return false;
+}
+ajaxObject = false;
+//if(document.getElementById('name').value >= 'a' && document.getElementById('name').value <= 'z')
+// alert(document.getElementById('name').value);
 
-	if (window.XMLHttpRequest) { // if we're on Gecko (Firefox etc.), KHTML/WebKit (Safari/Konqueror) and IE7
-		
-		ajaxObject = new XMLHttpRequest(); // create our new Ajax object
+if (window.XMLHttpRequest) { // if we're on Gecko (Firefox etc.), KHTML/WebKit (Safari/Konqueror) and IE7
+ajaxObject = new XMLHttpRequest(); // create our new Ajax object
 
-		if (ajaxObject.overrideMimeType) { // older Mozilla-based browsers need some extra help
-			ajaxObject.overrideMimeType('text/xml');
-		}
-	
-		
-	}
-	else if (window.ActiveXObject) { // and now for IE6
-			try {// IE6 has two methods of calling the object, typical!
+if (ajaxObject.overrideMimeType) { // older Mozilla-based browsers need some extra help
+ajaxObject.overrideMimeType('text/xml');
+}
+}
+else if (window.ActiveXObject) { // and now for IE6
+try {// IE6 has two methods of calling the object, typical!
 
-			ajaxObject = new ActiveXObject("Msxml2.XMLHTTP"); 
-			// create the ActiveX control
+ajaxObject = new ActiveXObject("Msxml2.XMLHTTP");
+// create the ActiveX control
 
 
-		} catch (e) { // catch the error if creation fails
+} catch (e) { // catch the error if creation fails
 
-			try { // try something else
+try { // try something else
 
-			ajaxObject = new ActiveXObject("Microsoft.XMLHTTP");
-			// create the ActiveX control (using older XML library)
+ajaxObject = new ActiveXObject("Microsoft.XMLHTTP");
+// create the ActiveX control (using older XML library)
 
 
-			} catch (e) {} // catch the error if creation fails
-		}
-	}
+} catch (e) {} // catch the error if creation fails
+}
+}
 
-        if (!ajaxObject) { // if the object doesn't work
+if (!ajaxObject) { // if the object doesn't work
 
-	    	// for some reason it hasn't worked, so show an error
+// for some reason it hasn't worked, so show an error
 
-		alert('Sorry, your browser seems to not support this functionality.');
+alert('Sorry, your browser seems to not support this functionality.');
 
-		return false; // exit out of this function
-        }
+return false; // exit out of this function
+}
 
-	
-        ajaxObject.onreadystatechange = ajaxResponse; // when the ready state changes, run this function
+ajaxObject.onreadystatechange = ajaxResponse; // when the ready state changes, run this function
 
-	// DO NOT ADD THE () AT THE END, NO PARAMETERS ALLOWED!
+// DO NOT ADD THE () AT THE END, NO PARAMETERS ALLOWED!
 
-	ajaxObject.open('GET', url, true); // open the query to the server
+ajaxObject.open('GET', url, true); // open the query to the server
 
-        ajaxObject.send(null); // close the query
+ajaxObject.send(null); // close the query
 
-	// and now we wait until the readystate changes, at which point
-	// ajaxResponse(); is executed
+// and now we wait until the readystate changes, at which point
+// ajaxResponse(); is executed
 
-	return true;
+return true;
 
-    } // end function doAjaxQuery
+} // end function doAjaxQuery
 
 function ajaxResponse() { // this function will handle the processing
 
-	// N.B. - in making your own functions like this, please note
-	// that you cannot have ANY PARAMETERS for this type of function!!
-	
-	if (ajaxObject.readyState == 4) { // if ready state is 4 (the page is finished loading)
+// N.B. - in making your own functions like this, please note
+// that you cannot have ANY PARAMETERS for this type of function!!
+if (ajaxObject.readyState == 4) { // if ready state is 4 (the page is finished loading)
 
-		if (ajaxObject.status == 200) { // if the status code is 200 (everything's OK)
+if (ajaxObject.status == 200) { // if the status code is 200 (everything's OK)
 
-			// here is where we will do the processing
-			//alert(ajaxObject.responseText);
-			if (ajaxObject.responseText == '1') // if the result is 1
-			{
-				//alert('Welcome back!');
-				//alert(ajaxObject.responseText);
-				document.getElementById('divResponse').className = "visibleDiv";
+// here is where we will do the processing
+//alert(ajaxObject.responseText);
+if (ajaxObject.responseText == '1') // if the result is 1
+{
+//alert('Welcome back!');
+//alert(ajaxObject.responseText);
+document.getElementById('divResponse').className = "visibleDiv";
 
-			}
+}
 
-			else { // otherwise
+else { // otherwise
 
-			//	alert('Nice to meet you, stranger!');
-				document.getElementById('divResponse').className = "hiddenDiv";
+// alert('Nice to meet you, stranger!');
+document.getElementById('divResponse').className = "hiddenDiv";
 
-			}
+}
 
-		} // end if
+} // end if
 
-		else { // if the status code is anything else (bad news)
+else { // if the status code is anything else (bad news)
 
-			alert('There was an error. HTTP error code ' + ajaxObject.status.toString() + '.');
-			return; // exit
+alert('There was an error. HTTP error code ' + ajaxObject.status.toString() + '.');
+return; // exit
 
-		}
+}
 
-	} // end if
+} // end if
 
-	// if the ready state isn't 4, we don't do anything, just
-	// wait until it is...
+// if the ready state isn't 4, we don't do anything, just
+// wait until it is...
 
 
 } // end function ajaxResponse
@@ -129,10 +121,30 @@ function ajaxResponse() { // this function will handle the processing
 </script>
 </head>
 <body>
-<form name="ajaxform" method="get" action="javascript:;" onkeyup="doAjaxQuery('ajaxKey.php?name=' + document.getElementById('name').value);"" onsubmit="doAjaxQuery('ajax.php?name=' + document.getElementById('name').value);">
-Search:&nbsp;&nbsp;<input type="text" name="name" id="name" value="" /><br /><br />
-<input type="submit" value=" OK " />
-</form>
-<div Class="hiddenDiv" id="divResponse">word is in the database!</div>
-</body>
+	<div>
+	<form 	name="ajaxform" 
+			method="get"
+			action="javascript:;" 
+			autocomplete = "off"
+			onkeyup="doAjaxQuery('ajaxAC.php?name=' + document.getElementById('name').value);" 
+			onsubmit="doAjaxQuery('ajax.php?name=' + document.getElementById('name').value);"
+	>
+
+	<!--Search:&nbsp;&nbsp;-->
+	
+	<input 	type="text" 
+			name="name" 
+			id="name" 
+			value="" 
+	/>
+			
+	<!--<br /><br />-->
+	
+	<input type="submit" value=" OK " />
+	
+	</form>
+	</div>
+	<div Class="hiddenDiv" id="divResponse">word is in the database!</div>
+
+	</body>
 </html>

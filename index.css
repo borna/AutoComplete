@@ -1,7 +1,21 @@
 .hiddenDiv{
 	visibility:hidden;
-}
+	border-style:solid;
+	border-width:thin;
 	
+}
+
 .visibleDiv{
 	visibility:visible;
+	
+	width:150px;
+	border-style:solid;
+	border-width:1px;
+	margin-top:-2px;
+	padding:1px;
+	
+}
+
+#name{
+	width:150px;
 }
