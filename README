@@ -1,2 +1,15 @@
 This project is for building an AJAX application that could help user have some hint on the
 input texts.
+
+Coding styles commited:
+1. tend to be using space rather than tabs
+2. tend to use 2-space wide for each indent
+3. the naming rules seems to be fine right now
+4. no tracing spaces
+5. using unix style line returns
+6. use braces like:
+   if (foo is true) {
+     do something...
+   } else {
+     do the opposite...
+   }
