@@ -1,6 +1,16 @@
 This project is for building an AJAX application that could help user have some hint on the
 input texts.
 
+Learning notes:
+1. Javascript:
+	a. Chrome and firefox can help us debug, it is really useful and beautiful.
+	   You can set breakpoints, step trace, step into the function and debug
+	b. Now I use console.log console.err(..), console.warn("...") more often.
+	   Because alert(..) is a little bit annoying.
+	c. The next goal is to get/set the node of the DOM to whatever I want.
+2. 
+
+
 Coding styles commited:
 1. tend to be using space rather than tabs
 2. tend to use 2-space wide for each indent
