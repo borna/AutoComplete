@@ -9,10 +9,11 @@
       var ajaxObject = false;
       // this is our object which gives us access
       // to Ajax functionality
-      function doAjaxQuery(url) {
+      function doAjaxAutoComplete(url) {
         if(document.getElementById('name').value != userInput) {
           userInput = document.getElementById('name').value;
         } else {
+          console.log("We have dup input so we leave it alone");
           return false;
         }
         ajaxObject = false;
@@ -40,13 +41,7 @@
           return false; // exit out of this function
         }
         document.getElementById('divResponse').className = "hiddenDiv";
-
-        if (url.match(/ajaxAC/)) {
-          ajaxObject.onreadystatechange = ajaxAC_Response;
-        }
-        else {
-          ajaxObject.onreadystatechange = ajax_Response; // when the ready state changes, run this function
-        }
+        ajaxObject.onreadystatechange = autoCompleteResponse;
         // DO NOT ADD THE () AT THE END, NO PARAMETERS ALLOWED!
         ajaxObject.open('GET', url, true); // open the query to the server
         ajaxObject.send(null); // close the query
@@ -55,7 +50,40 @@
         return true;
       } // end function doAjaxQuery
 
-      function ajaxAC_Response() { // this function will handle the processing
+      function doAjaxSubmit(url) {
+        ajaxObject = false;
+        if (window.XMLHttpRequest) { // if we're on Gecko (Firefox etc.), KHTML/WebKit (Safari/Konqueror) and IE7
+          ajaxObject = new XMLHttpRequest(); // create our new Ajax object
+          if (ajaxObject.overrideMimeType) { // older Mozilla-based browsers need some extra help
+            ajaxObject.overrideMimeType('text/xml');
+          }
+        } else if (window.ActiveXObject) { // and now for IE6
+          try {// IE6 has two methods of calling the object, typical!
+            ajaxObject = new ActiveXObject("Msxml2.XMLHTTP");
+            // create the ActiveX control
+          } catch (e) { // catch the error if creaion fails
+            try { // try something else
+              ajaxObject = new ActiveXObject("Microsoft.XMLHTTP");
+              // create the ActiveX control (using older XML library)
+            } catch (e) {} // catch the error if creation fails
+          }
+        }
+        if (!ajaxObject) { // if the object doesn't work
+          // for some reason it hasn't worked, so show an error
+          alert('Sorry, your browser seems to not support this functionality.');
+          return false; // exit out of this function
+        }
+        document.getElementById('divResponse').className = "hiddenDiv";
+        ajaxObject.onreadystatechange = submitResponse;
+        // DO NOT ADD THE () AT THE END, NO PARAMETERS ALLOWED!
+        ajaxObject.open('GET', url, true); // open the query to the server
+        ajaxObject.send(null); // close the query
+        // and now we wait until the readystate changes, at which point
+        // ajaxResponse(); is executed
+        return true;
+      }
+
+      function autoCompleteResponse() { // this function will handle the processing
         // N.B. - in making your own functions like this, please note
         // that you cannot have ANY PARAMETERS for this type of function!!
         if (ajaxObject.readyState == 4) { // if ready state is 4 (the page is finished loading)
@@ -75,7 +103,7 @@
         // wait until it is...
       } // end function
 
-      function ajax_Response() { // this function will handle the processing
+      function submitResponse() { // this function will handle the processing
         // N.B. - in making your own functions like this, please note
         // that you cannot have ANY PARAMETERS for this type of function!!
         if (ajaxObject.readyState == 4) { // if ready state is 4 (the page is finished loading)
@@ -84,9 +112,9 @@
             //alert(ajaxObject.responseText);
             document.getElementById('divResponse').className = "hiddenDiv";
             if (ajaxObject.responseText == '1') {
-              alert('The name is on server');
+              console.log('The name is on server');
             } else {
-              alert('The name is not on server');
+              console.log('The name is not on server');
             }
           } // end if
           else { // if the status code is anything else (bad news)
@@ -96,27 +124,20 @@
         } // end if
         // if the ready state isn't 4, we don't do anything, just
         // wait until it is...
-      } // end function ajaxResponse
-
-      function submit_and_cleanup() {
-        doAjaxQuery('ajax.php?name=' + document.getElementById('name').value);
-        //document.getElementById('divResponse').className = "hiddenDiv";
-        //document.getElementById('divResponse').innerHTML = "";
-      }
+      } // end function ajaxRespons
     </script>
   </head>
   <body>
     <div>
       <form name="ajaxform"
             method="get"
-            action="javascript:;"
-            autocomplete = "off"
-            onkeyup="doAjaxQuery('ajaxAC.php?name=' + document.getElementById('name').value);"
-            onsubmit="doAjaxQuery('ajax.php?name=' + document.getElementById('name').value);">
-
-        <!--Search:&nbsp;&nbsp;-->
+            action="javascript:"
+            autocomplete="off"
+            onkeyup="doAjaxAutoComplete('ajaxAC.php?name=' + document.getElementById('name').value);"
+            onsubmit="doAjaxSubmit('ajax.php?name=' + document.getElementById('name').value);"
+            >
         <input type="text" name="name" id="name" value="" />
-        <input type="submit" value=" Search " onClick="submit_and_cleanup();"/>
+        <input type="submit" value=" Search " />
       </form>
     </div>
 
