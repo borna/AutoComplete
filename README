@@ -8,7 +8,9 @@ Learning notes:
 	b. Now I use console.log console.err(..), console.warn("...") more often.
 	   Because alert(..) is a little bit annoying.
 	c. The next goal is to get/set the node of the DOM to whatever I want.
-2. 
+2. XML
+	a. To make a XML response from PHP, one should use text/xml instead of text/plain
+	b. again, Chrome quickly find out my typo and help me debug, very nice tool
 
 
 Coding styles commited:
