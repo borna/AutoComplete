@@ -88,11 +88,12 @@
         // that you cannot have ANY PARAMETERS for this type of function!!
         if (ajaxObject.readyState == 4) { // if ready state is 4 (the page is finished loading)
           if (ajaxObject.status == 200) { // if the status code is 200 (everything's OK)
+            var responseXML = ajaxObject.responseXML;
             // here is where we will do the processing
             //alert(ajaxObject.responseText);
             // we should parse the returning XML and show as HTML element
             document.getElementById('divResponse').className = "visibleDiv";
-            document.getElementById('divResponse').innerHTML = ajaxObject.responseText;
+            resolveResponseXML(responseXML);
           } // end if
           else { // if the status code is anything else (bad news)
             alert('Error: ' + ajaxObject.status.toString() + '. ' + ajaxObject.statusText);
@@ -125,6 +126,16 @@
         // if the ready state isn't 4, we don't do anything, just
         // wait until it is...
       } // end function ajaxRespons
+
+      function resolveResponseXML(responseXML) {
+        var wList = responseXML.getElementsByTagName('W');
+        var out = '<ul>';
+        for (i = 0, len = wList.length; i < len; ) {
+          out += '<li>' + wList[i++].firstChild.nodeValue + '</li>';
+        }
+        out += '</ul>';
+        document.getElementById('divResponse').innerHTML = out;
+      }
     </script>
   </head>
   <body>
