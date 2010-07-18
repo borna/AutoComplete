@@ -3,7 +3,7 @@
 //session_start(); // start a session
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
-header("Content-type: text/plain");
+header("Content-type: text/xml");
 
 $word = $_GET['name'];
 
