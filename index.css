@@ -13,10 +13,14 @@
   padding:1px;	
 }
 
-#name{
-  width:150px;
+#idInput {
+  margin: 0px auto;
+  padding: 2px;
+  border: 2px;
+  border-style: dashed;
+  width: 40%;
 }
 
-#hint {
-  margin: 300px;
+#idInputBox {
+  width: 66%;
 }

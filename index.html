@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>First ever Ajax application with PHP</title>
+    <title>Good Suggestion App</title>
     <link type="text/css" rel="stylesheet" href="index.css" />
     <script type="text/javascript" src="isugg.js"></script>
   </head>
 
   <body>
-    <div id="hint">
+    <div id="idInput">
       <form name="ajaxform"
             method="get"
             action="javascript:"
@@ -17,8 +17,8 @@
             onkeyup="doAjaxAutoComplete('ajaxAC.php?name=' + document.getElementById('name').value);"
             onsubmit="doAjaxSubmit('ajax.php?name=' + document.getElementById('name').value);"
             >
-        <input type="text" name="name" id="name" value="" />
-        <input type="submit" value=" Search " />
+        <input type="text" name="QueryInput" id="idInputBox" value="" />
+        <input type="submit" value=" Send Query " />
       </form>
     </div>
 
