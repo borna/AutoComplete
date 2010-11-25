@@ -2,8 +2,8 @@
   var ajaxObject = false;
 
   function doAjaxAutoComplete(url) {
-    if(document.getElementById('name').value != userInput) {
-      userInput = document.getElementById('name').value;
+    if(document.getElementById('idInputBox').value != userInput) {
+      userInput = document.getElementById('idInputBox').value;
     } else {
       console.log("We have dup input so we leave it alone");
       return false;
