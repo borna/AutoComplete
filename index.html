@@ -4,21 +4,23 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Good Suggestion App</title>
-    <link type="text/css" rel="stylesheet" href="index.css" />
+    <link type="text/css" rel="stylesheet" href="mystyle.css" />
     <script type="text/javascript" src="isugg.js"></script>
   </head>
 
   <body>
+    <div id="banner">
+    </div>
     <div id="idInput">
       <form name="ajaxform"
             method="get"
             action="javascript:"
             autocomplete="off"
-            onkeyup="doAjaxAutoComplete('ajaxAC.php?name=' + document.getElementById('name').value);"
-            onsubmit="doAjaxSubmit('ajax.php?name=' + document.getElementById('name').value);"
+            onkeyup="doAjaxAutoComplete('ajaxAC.php?name=' + document.getElementById('idInputBox').value);"
+            onsubmit="doAjaxSubmit('ajax.php?name=' + document.getElementById('idInputBox').value);"
             >
         <input type="text" name="QueryInput" id="idInputBox" value="" />
-        <input type="submit" value=" Send Query " />
+        <input type="submit" value="Send Query" />
       </form>
     </div>
 
