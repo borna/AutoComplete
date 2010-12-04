@@ -1,17 +1,46 @@
 <?php
-
-session_start(); // start a session
-
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+session_start();
 header("Content-type: text/plain");
-// this is only plain text, so set the HTTP header accordingly
 
-$names = array( // this is our array of names - feel free to change/add as required!
-  'Bob', 'Jim', 'Mark', 'Graham', 'Brian', 'Borna', 'Qpixel', 'PuzzleCompany'
-);
-
-if (in_array($_GET['name'], $names)) { // if that name is in our array above
-  echo '1'; // echo 1 (tells JavaScript we know this person)
-} else { // otherwise
-  echo '0'; // echo 0
+foreach ($_GET as $key => $value) {
+  echo '<p>'.$key.'=>'.$value.'</p>';
 }
+foreach ($_POST as $key => $value) {
+  echo '<p>'.$key.'=>'.$value.'</p>';
+}
+foreach ($_FILES as $key => $value) {
+  echo '<p>'.$key.'=>'.$value.'</p>';
+}
+foreach ($_SERVER as $key => $value) {
+  echo '<p>'.$key.'=>'.$value.'</p>';
+}
+foreach ($_ENV as $key => $value) {
+  echo '<p>'.$key.'=>'.$value.'</p>';
+}
+
+if (isset($_GET['query'])) {
+  $query = $_GET['query'];
+  $file_handle = fopen('notable-words.txt','a') or die("can't open file for read/write");
+  rewind($file_handle);
+  while (!feof($file_handle)) {
+    $lineword = fgets($file_handle, 1024);
+    if ($lineword == $query) {
+      break;
+    }
+  }
+
+  if (feof($file_handle)) {
+    rewind($file_handle);
+    while (!feof($file_handle)) {
+      $line = fgets($file_handle, 1024);
+      echo "<p>".$line."</p>";
+    }
+  } else {
+    echo "<p>".$query." is found in the file </p>";
+  }
+  fclose($file_handle) or die("can't close:".$php_errormsg);
+}
+
 ?>
