@@ -82,7 +82,7 @@
         if (ajaxObject.responseText == '1') {
           console.log('The name is on server');
         } else {
-          console.log('The name is not on server');
+          console.log('The reponse from PHP is:' + ajaxObject.responseText);
         }
       }
       else {
