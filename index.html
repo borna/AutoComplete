@@ -13,11 +13,11 @@
     </div>
     <div id="idInput">
       <form name="ajaxform"
-            method="get"
+            method="GET"
             action="javascript:"
             autocomplete="off"
-            onkeyup="doAjaxAutoComplete('ajaxAC.php?name=' + document.getElementById('idInputBox').value);"
-            onsubmit="doAjaxSubmit('ajax.php?name=' + document.getElementById('idInputBox').value);"
+            onkeyup="doAjaxAutoComplete('ajaxAC.php?metaquery=' + document.getElementById('idInputBox').value);"
+            onsubmit="doAjaxSubmit('ajax.php?query=' + document.getElementById('idInputBox').value);"
             >
         <input type="text" name="QueryInput" id="idInputBox" value="" />
         <input type="submit" value="Send Query" />
